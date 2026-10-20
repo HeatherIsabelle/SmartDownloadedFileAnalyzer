@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Scan History - Smart Downloaded File Security Analyzer
+    </title>
+
+
+    <!-- Bootstrap 5 -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+
+    <!-- Font Awesome -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    >
+
+
+    <!-- Google Font -->
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- Shared CSS -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="d-flex history-page">
+
+
+    <!-- =====================================================
+         SIDEBAR
+         ===================================================== -->
+
+    <div class="sidebar p-3 d-flex flex-column justify-content-between"
+         style="width: 260px; flex-shrink: 0;">
+
+
+        <div>
+
+
+            <!-- Logo -->
+
+            <div class="d-flex align-items-center mb-4 px-2">
+
+                <i
+                    class="fa-solid fa-shield-halved text-info fs-3 me-2"
+                ></i>
+
+                <span class="fw-bold fs-5 text-white" >
+                    FILE ANALYZER
+                </span>
+
+            </div>
+
+
+            <hr class="text-secondary">
+
+
+            <!-- Navigation -->
+
+            <ul class="nav nav-pills flex-column">
+
+
+                <!-- Scanner -->
+
+                <li class="nav-item">
+
+                    <a
+                        href="{{ url_for('index') }}"
+                        class="nav-link"
+                    >
+
+                        <i class="fa-solid fa-magnifying-glass me-2"></i>
+
+                        <span data-i18n="staticScanner">
+                            Static Scanner
+                        </span>
+
+                    </a>
+
+                </li>
+
+
+                <!-- History -->
+
+                <li class="nav-item">
+
+                    <a
+                        href="{{ url_for('history') }}"
+                        class="nav-link active"
+                    >
+
+                        <i class="fa-solid fa-clock-rotate-left me-2"></i>
+
+                        <span data-i18n="scanHistory">
+                            Scan History
+                        </span>
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <!-- =================================================
+             PROJECT INFORMATION
+             ================================================= -->
+
+   
+            <div class="col-md-9"> <!-- KEEP THIS WRAPPER INTACT -->
+   
+           
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <div class="main-content p-4 flex-grow-1">
+
+
+        <!-- =================================================
+             TOP HEADER
+             ================================================= -->
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+
+
+            <div>
+
+                <h2 class="fw-bold text-white mb-1">
+
+                    <i class="fa-solid fa-clock-rotate-left text-info me-2"></i>
+
+                    <span data-i18n="securityScanHistory">
+                        Security Scan History
+                    </span>
+
+                </h2>
+
+
+                <p class="text-muted mb-0">
+
+                    Smart Downloaded File Security Analyzer
+
+                </p>
+
+            </div>
+
+
+            <!-- Controls -->
+
+            <div class="d-flex gap-2 flex-wrap">
+
+
+                <!-- Theme -->
+
+                <button
+                    id="themeToggle"
+                    class="btn btn-outline-light"
+                    onclick="toggleTheme()"
+                    title="Change Theme"
+                >
+
+                    <i
+                        id="themeIcon"
+                        class="fa-solid fa-sun"
+                    ></i>
+
+                    <span id="themeText">
+                        Light
+                    </span>
+
+                </button>
+
+
+                <!-- Language -->
+
+                <button
+                    id="languageToggle"
+                    class="btn btn-outline-warning language-toggle"
+                    onclick="toggleLanguage()"
+                >
+
+                    <i class="fa-solid fa-language"></i>
+
+                    <span id="languageText">
+                        မြန်မာ
+                    </span>
+
+                </button>
+
+
+                <!-- Engine Status -->
+
+                <button
+                    class="btn btn-outline-info engine-status"
+                >
+
+                    <i class="fa-solid fa-circle-check me-1"></i>
+
+                    <span data-i18n="engineActive">
+                        Engine Active
+                    </span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             SUMMARY STATISTICS
+             ================================================= -->
+
+        <div class="row g-3 mb-4">
+
+
+            <!-- TOTAL -->
+
+            <div class="col-md-3">
+
+                <div class="stat-card history-stat-card d-flex justify-content-between align-items-center">
+
+                    <div>
+
+                        <div
+                            class="text-muted small"
+                            data-i18n="totalFiles"
+                        >
+                            Total Files Scanned
+                        </div>
+
+
+                        <div class="fs-4 fw-bold text-light">
+                            {{ total }}
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="rounded-circle bg-primary"
+                        style="width: 14px; height: 14px;"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DANGER -->
+
+            <div class="col-md-3">
+
+                <div class="stat-card history-stat-card d-flex justify-content-between align-items-center">
+
+                    <div>
+
+                        <div
+                            class="text-muted small"
+                            data-i18n="malwareDanger"
+                        >
+                            Malware / Danger
+                        </div>
+
+
+                        <div class="fs-4 fw-bold text-light">
+                            {{ danger }}
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="rounded-circle bg-danger"
+                        style="width: 14px; height: 14px;"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CAUTION -->
+
+            <div class="col-md-3">
+
+                <div class="stat-card history-stat-card d-flex justify-content-between align-items-center">
+
+                    <div>
+
+                        <div
+                            class="text-muted small"
+                            data-i18n="suspiciousCaution"
+                        >
+                            Suspicious / Caution
+                        </div>
+
+
+                        <div class="fs-4 fw-bold text-light">
+                            {{ caution }}
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="rounded-circle bg-warning"
+                        style="width: 14px; height: 14px;"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SAFE -->
+
+            <div class="col-md-3">
+
+                <div class="stat-card history-stat-card d-flex justify-content-between align-items-center">
+
+                    <div>
+
+                        <div
+                            class="text-muted small"
+                            data-i18n="cleanSafe"
+                        >
+                            Clean / Safe Files
+                        </div>
+
+
+                        <div class="fs-4 fw-bold text-light">
+                            {{ safe }}
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="rounded-circle bg-success"
+                        style="width: 14px; height: 14px;"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             HISTORY TABLE
+             ================================================= -->
+
+        <div class="card card-custom history-table-wrapper">
+
+
+            <!-- Table Header -->
+
+            <div class="card-body p-0">
+
+
+                <div class="p-3 border-bottom border-secondary d-flex align-items-center">
+
+                    <i
+                        class="fa-solid fa-clock-rotate-left text-info me-2"
+                    ></i>
+
+
+                    <h6 class="text-light mb-0 fw-bold">
+
+                        <span data-i18n="scanActivity">
+                            Global Scan Activity Log
+                        </span>
+
+                    </h6>
+
+                </div>
+
+
+                <!-- Table -->
+
+                <div class="table-responsive">
+
+                    <table class="table table-custom align-middle mb-0">
+
+
+                        <thead>
+
+                            <tr>
+
+                                <th data-i18n="fileName">
+                                    File Name
+                                </th>
+
+
+                                <th data-i18n="shaReference">
+                                    SHA-256 Reference
+                                </th>
+
+
+                                <th data-i18n="size">
+                                    Size
+                                </th>
+
+
+                                <th data-i18n="riskIndex">
+                                    Risk Index
+                                </th>
+
+
+                                <th data-i18n="verdict">
+                                    Verdict
+                                </th>
+
+
+                                <th data-i18n="timestamp">
+                                    Timestamp
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+
+                        {% for row in history %}
+
+                        <tr>
+
+
+                            <!-- FILE NAME -->
+
+                            <td class="fw-bold">
+
+                                <i
+                                    class="fa-regular fa-file me-2 text-secondary"
+                                ></i>
+
+                                {{ row.filename }}
+
+                            </td>
+
+
+                            <!-- SHA-256 -->
+
+                            <td>
+
+                                <code
+                                    class="history-hash bg-dark px-2 py-1 rounded border border-secondary border-opacity-25"
+                                >
+                                    {{ row.hash }}
+                                </code>
+
+                            </td>
+
+
+                            <!-- SIZE -->
+
+                            <td class="history-size fw-normal">
+
+                                {{ row.size }}
+
+                            </td>
+
+
+                            <!-- RISK -->
+
+                            <td class="history-score fw-semibold">
+
+                                {{ row.score }}%
+
+                            </td>
+
+
+                            <!-- VERDICT -->
+
+                            <td>
+
+
+                                {% if row.status == 'Safe' %}
+
+                                <span
+                                    class="badge bg-success text-white px-2 py-1"
+                                    data-status="Safe"
+                                >
+                                    Safe
+                                </span>
+
+
+                                {% elif row.status == 'Caution' %}
+
+                                <span
+                                    class="badge bg-warning text-dark px-2 py-1"
+                                    data-status="Caution"
+                                >
+                                    Caution
+                                </span>
+
+
+                                {% else %}
+
+                                <span
+                                    class="badge bg-danger text-white px-2 py-1"
+                                    data-status="Danger"
+                                >
+                                    Danger
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <!-- DATE -->
+
+                            <td class="history-date small">
+
+                                {{ row.date }}
+
+                            </td>
+
+                        </tr>
+
+
+                        {% else %}
+
+                        <!-- No history -->
+
+                        <tr>
+
+                            <td
+                                colspan="6"
+                                class="text-center text-muted py-5"
+                            >
+
+                                <i
+                                    class="fa-solid fa-folder-open fs-2 mb-3 d-block"
+                                ></i>
+
+                                <span data-i18n="noHistory">
+                                    No scan history available.
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Bootstrap JS -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+></script>
+
+
+<!-- =========================================================
+     THEME SYSTEM
+     ========================================================= -->
+
+<script>
+
+function applyTheme(theme) {
+
+    const body =
+        document.body;
+
+    const themeIcon =
+        document.getElementById("themeIcon");
+
+    const themeText =
+        document.getElementById("themeText");
+
+    const themeButton =
+        document.getElementById("themeToggle");
+
+
+    if (theme === "light") {
+
+        body.classList.add("light-theme");
+
+
+        if (themeIcon) {
+
+            themeIcon.className =
+                "fa-solid fa-moon";
+
+        }
+
+
+        if (themeText) {
+
+            themeText.textContent =
+                "Dark";
+
+        }
+
+
+        if (themeButton) {
+
+            themeButton.classList.remove(
+                "btn-outline-light"
+            );
+
+            themeButton.classList.add(
+                "btn-outline-dark"
+            );
+
+        }
+
+    }
+
+    else {
+
+        body.classList.remove("light-theme");
+
+
+        if (themeIcon) {
+
+            themeIcon.className =
+                "fa-solid fa-sun";
+
+        }
+
+
+        if (themeText) {
+
+            themeText.textContent =
+                "Light";
+
+        }
+
+
+        if (themeButton) {
+
+            themeButton.classList.remove(
+                "btn-outline-dark"
+            );
+
+            themeButton.classList.add(
+                "btn-outline-light"
+            );
+
+        }
+
+    }
+
+
+    localStorage.setItem(
+        "selectedTheme",
+        theme
+    );
+
+}
+
+
+function toggleTheme() {
+
+    const currentTheme =
+        localStorage.getItem("selectedTheme") || "dark";
+
+
+    const newTheme =
+        currentTheme === "dark"
+            ? "light"
+            : "dark";
+
+
+    applyTheme(newTheme);
+
+}
+
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const savedTheme =
+        localStorage.getItem("selectedTheme") || "dark";
+
+    applyTheme(savedTheme);
+
+});
+
+</script>
+
+
+<!-- =========================================================
+     LANGUAGE SYSTEM
+     ========================================================= -->
+
+<script>
+
+const historyTranslations = {
+
+    en: {
+
+        staticScanner:
+            "Static Scanner",
+
+        scanHistory:
+            "Scan History",
+
+        projectInformation:
+            "PROJECT INFORMATION",
+
+        student:
+            "Student",
+
+        supervisor:
+            "Supervisor",
+
+        securityScanHistory:
+            "Security Scan History",
+
+        engineActive:
+            "Engine Active",
+
+        totalFiles:
+            "Total Files Scanned",
+
+        malwareDanger:
+            "Malware / Danger",
+
+        suspiciousCaution:
+            "Suspicious / Caution",
+
+        cleanSafe:
+            "Clean / Safe Files",
+
+        scanActivity:
+            "Global Scan Activity Log",
+
+        fileName:
+            "File Name",
+
+        shaReference:
+            "SHA-256 Reference",
+
+        size:
+            "Size",
+
+        riskIndex:
+            "Risk Index",
+
+        verdict:
+            "Verdict",
+
+        timestamp:
+            "Timestamp",
+
+        noHistory:
+            "No scan history available."
+
+    },
+
+
+    my: {
+
+        staticScanner:
+            "Static Scanner",
+
+        scanHistory:
+            "စစ်ဆေးမှုမှတ်တမ်း",
+
+        projectInformation:
+            "စီမံကိန်းအချက်အလက်",
+
+        student:
+            "ကျောင်းသား",
+
+        supervisor:
+            "ကြီးကြပ်ဆရာ",
+
+        securityScanHistory:
+            "ဖိုင်စစ်ဆေးမှုမှတ်တမ်း",
+
+        engineActive:
+            "စနစ်အလုပ်လုပ်နေသည်",
+
+        totalFiles:
+            "စစ်ဆေးပြီးသော ဖိုင်စုစုပေါင်း",
+
+        malwareDanger:
+            "အန္တရာယ်ရှိသော ဖိုင်",
+
+        suspiciousCaution:
+            "သံသယရှိသော ဖိုင်",
+
+        cleanSafe:
+            "လုံခြုံသော ဖိုင်",
+
+        scanActivity:
+            "ဖိုင်စစ်ဆေးမှုမှတ်တမ်း",
+
+        fileName:
+            "ဖိုင်အမည်",
+
+        shaReference:
+            "SHA-256 Reference",
+
+        size:
+            "အရွယ်အစား",
+
+        riskIndex:
+            "အန္တရာယ်အမှတ်",
+
+        verdict:
+            "ဆုံးဖြတ်ချက်",
+
+        timestamp:
+            "အချိန်",
+
+        noHistory:
+            "စစ်ဆေးမှုမှတ်တမ်း မရှိသေးပါ။"
+
+    }
+
+};
+
+
+function applyLanguage(language) {
+
+    document
+        .querySelectorAll("[data-i18n]")
+        .forEach(element => {
+
+            const key =
+                element.getAttribute("data-i18n");
+
+
+            if (
+                historyTranslations[language] &&
+                historyTranslations[language][key]
+            ) {
+
+                element.textContent =
+                    historyTranslations[language][key];
+
+            }
+
+        });
+
+
+    /* Verdict badges */
+
+    document
+        .querySelectorAll("[data-status]")
+        .forEach(element => {
+
+            const status =
+                element.getAttribute("data-status");
+
+
+            if (language === "my") {
+
+                if (status === "Safe") {
+
+                    element.textContent =
+                        "လုံခြုံ";
+
+                }
+
+                else if (status === "Caution") {
+
+                    element.textContent =
+                        "သတိပြုရန်";
+
+                }
+
+                else if (status === "Danger") {
+
+                    element.textContent =
+                        "အန္တရာယ်";
+
+                }
+
+            }
+
+            else {
+
+                element.textContent =
+                    status;
+
+            }
+
+        });
+
+
+    /* Language button */
+
+    const languageText =
+        document.getElementById("languageText");
+
+
+    if (languageText) {
+
+        languageText.textContent =
+            language === "en"
+                ? "မြန်မာ"
+                : "English";
+
+    }
+
+
+    document.documentElement.lang =
+        language === "my"
+            ? "my"
+            : "en";
+
+
+    localStorage.setItem(
+        "selectedLanguage",
+        language
+    );
+
+}
+
+
+function toggleLanguage() {
+
+    const currentLanguage =
+        localStorage.getItem("selectedLanguage") || "en";
+
+
+    const newLanguage =
+        currentLanguage === "en"
+            ? "my"
+            : "en";
+
+
+    applyLanguage(newLanguage);
+
+}
+
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const savedLanguage =
+        localStorage.getItem("selectedLanguage") || "en";
+
+
+    applyLanguage(savedLanguage);
+
+});
+
+</script>
+
+
+</body>
+</html>

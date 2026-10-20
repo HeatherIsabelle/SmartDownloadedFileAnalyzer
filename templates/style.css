@@ -1,0 +1,520 @@
+/* =========================================================
+   SMART DOWNLOADED FILE SECURITY ANALYZER
+   SHARED STYLESHEET
+   ========================================================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0b0f19;
+    color: #cbd5e1;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.sidebar {
+    background-color: #111827;
+    min-height: 100vh;
+    border-right: 1px solid #1f2937;
+    position: relative;
+}
+
+.sidebar .nav-link {
+    color: #9ca3af;
+    font-weight: 500;
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    transition: all 0.2s ease;
+}
+
+.sidebar .nav-link.active,
+.sidebar .nav-link:hover {
+    background-color: #1e293b;
+    color: #38bdf8;
+}
+
+
+
+
+.project-info {
+    position: absolute;
+    bottom: 5px;
+    left: 15px;
+    right: 15px;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.main-content {
+    flex-grow: 1;
+    min-height: 100vh;
+    background-color: #0b0f19;
+}
+
+
+/* =========================================================
+   DASHBOARD CARDS
+   ========================================================= */
+
+.dashboard-card,
+.card-custom {
+    background-color: #111827;
+    border: 1px solid #1f2937;
+    border-radius: 12px;
+    transition: all 0.25s ease;
+}
+
+.dashboard-card:hover,
+.card-custom:hover {
+    border-color: #3b82f6;
+}
+
+.dashboard-card p {
+    color: #94a3b8 !important;
+    margin-bottom: 5px;
+}
+
+.dashboard-card h3,
+.dashboard-card h4,
+.dashboard-card h5,
+.dashboard-card h6 {
+    color: #ffffff !important;
+}
+
+
+/* =========================================================
+   STAT CARDS
+   ========================================================= */
+
+.stat-card {
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 15px 20px;
+}
+
+.stat-card .text-muted {
+    color: #cbd5e1 !important;
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   DROPZONE
+   ========================================================= */
+
+.dropzone-area {
+    border: 2px dashed #3b82f6;
+    background-color: #111827;
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #e2e8f0;
+}
+
+.dropzone-area:hover {
+    background-color: #1e293b;
+}
+
+.dropzone-area.dragover {
+    background-color: #1e293b;
+    border-color: #38bdf8;
+    transform: scale(1.01);
+}
+
+.dropzone-area h5 {
+    color: #ffffff;
+}
+
+.dropzone-area p {
+    color: #94a3b8;
+}
+
+
+/* =========================================================
+   STATUS BADGES
+   ========================================================= */
+
+.status-badge-Danger {
+    background-color: #ef4444;
+    color: white;
+}
+
+.status-badge-Caution {
+    background-color: #f59e0b;
+    color: #1e293b;
+}
+
+.status-badge-Safe {
+    background-color: #10b981;
+    color: white;
+}
+
+.badge-safe {
+    background-color: #059669;
+    color: #ffffff;
+}
+
+.badge-caution {
+    background-color: #d97706;
+    color: #ffffff;
+}
+
+.badge-danger {
+    background-color: #dc2626;
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.table-custom {
+    color: #cbd5e1;
+    margin-bottom: 0;
+}
+
+.table-custom th {
+    background-color: #0f172a;
+    color: #64748b;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid #334155;
+    padding: 12px;
+}
+
+.table-custom td {
+    background-color: transparent;
+    border-bottom: 1px solid #334155;
+    padding: 14px 12px;
+    vertical-align: middle;
+}
+
+.table-dark {
+    --bs-table-bg: #111827;
+    --bs-table-color: #cbd5e1;
+}
+
+
+/* =========================================================
+   PROGRESS RING
+   ========================================================= */
+
+.progress-ring-circle {
+    transition: stroke-dashoffset 0.35s;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+}
+
+
+/* =========================================================
+   LANGUAGE TOGGLE
+   ========================================================= */
+
+.language-toggle {
+    min-width: 125px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.language-toggle i {
+    margin-right: 6px;
+}
+
+
+/* =========================================================
+   MISC
+   ========================================================= */
+
+.progress-micro {
+    height: 6px;
+    background-color: #334155;
+    border-radius: 3px;
+    width: 80px;
+}
+
+
+/* =========================================================
+   HISTORY PAGE
+   ========================================================= */
+
+.history-subtitle {
+    color: #94a3b8 !important;
+}
+
+
+/* =========================================================
+   LIGHT THEME
+   ========================================================= */
+
+body.light-theme {
+    background-color: #f1f5f9;
+    color: #334155;
+}
+
+body.light-theme .main-content {
+    background-color: #f1f5f9;
+}
+
+
+/* =========================================================
+   LIGHT THEME - SIDEBAR
+   ========================================================= */
+
+body.light-theme .sidebar {
+    background-color: #ffffff;
+    border-right-color: #cbd5e1;
+}
+
+body.light-theme .sidebar .nav-link {
+    color: #475569;
+}
+
+body.light-theme .sidebar .nav-link:hover,
+body.light-theme .sidebar .nav-link.active {
+    background-color: #e0f2fe;
+    color: #0284c7;
+}
+
+/* FILE ANALYZER in light mode */
+body.light-theme .sidebar .text-white {
+    color: #1e293b !important;
+}
+
+
+/* =========================================================
+   LIGHT THEME - PROJECT INFORMATION
+   ========================================================= */
+
+body.light-theme .project-info {
+    background-color: #f8fafc !important;
+    border-color: #cbd5e1 !important;
+}
+
+/* Project information title/content */
+body.light-theme .project-info .text-white {
+    color: #1e293b !important;
+}
+
+/* Student / supervisor / muted information */
+body.light-theme .project-info .text-muted {
+    color: #64748b !important;
+}
+
+
+/* =========================================================
+   LIGHT THEME - HISTORY SUBTITLE
+   ========================================================= */
+
+body.light-theme .history-subtitle {
+    color: #64748b !important;
+}
+
+
+/* =========================================================
+   LIGHT THEME - CARDS
+   ========================================================= */
+
+body.light-theme .dashboard-card,
+body.light-theme .card-custom,
+body.light-theme .stat-card {
+    background-color: #ffffff;
+    border-color: #cbd5e1;
+}
+
+body.light-theme .dashboard-card:hover,
+body.light-theme .card-custom:hover {
+    border-color: #3b82f6;
+}
+
+
+/* =========================================================
+   LIGHT THEME - CARD TEXT
+   ========================================================= */
+
+body.light-theme .dashboard-card h3,
+body.light-theme .dashboard-card h4,
+body.light-theme .dashboard-card h5,
+body.light-theme .dashboard-card h6,
+body.light-theme .dashboard-card .text-white,
+body.light-theme .text-light {
+    color: #1e293b !important;
+}
+
+body.light-theme .dashboard-card p {
+    color: #64748b !important;
+}
+
+body.light-theme .stat-card .text-muted {
+    color: #64748b !important;
+}
+
+
+/* =========================================================
+   LIGHT THEME - GENERAL MUTED TEXT
+   ========================================================= */
+
+body.light-theme .text-muted {
+    color: #64748b !important;
+}
+
+
+/* =========================================================
+   LIGHT THEME - UPLOAD AREA
+   ========================================================= */
+
+body.light-theme .dropzone-area {
+    background-color: #f8fafc;
+    border-color: #60a5fa;
+    color: #334155;
+}
+
+body.light-theme .dropzone-area:hover,
+body.light-theme .dropzone-area.dragover {
+    background-color: #eff6ff;
+}
+
+body.light-theme .dropzone-area h5 {
+    color: #1e293b;
+}
+
+body.light-theme .dropzone-area p {
+    color: #64748b;
+}
+
+
+/* =========================================================
+   LIGHT THEME - TABLES
+   ========================================================= */
+
+body.light-theme .table-dark {
+    --bs-table-bg: #ffffff;
+    --bs-table-color: #334155;
+    --bs-table-border-color: #cbd5e1;
+}
+
+body.light-theme .table-custom {
+    color: #334155;
+}
+
+body.light-theme .table-custom th {
+    background-color: #f8fafc;
+    color: #64748b;
+    border-color: #cbd5e1;
+}
+
+body.light-theme .table-custom td {
+    background-color: #ffffff;
+    color: #334155 !important;
+    border-color: #cbd5e1;
+}
+
+body.light-theme .table-dark th,
+body.light-theme .table-dark td {
+    color: #334155;
+}
+
+body.light-theme .table-dark .text-white {
+    color: #1e293b !important;
+}
+
+
+/* =========================================================
+   LIGHT THEME - FILE INFORMATION
+   ========================================================= */
+
+body.light-theme .bg-dark {
+    background-color: #f8fafc !important;
+}
+
+body.light-theme .border-secondary {
+    border-color: #cbd5e1 !important;
+}
+
+body.light-theme code {
+    background-color: #f1f5f9 !important;
+}
+
+
+/* =========================================================
+   LIGHT THEME - HEADERS
+   ========================================================= */
+
+body.light-theme h2,
+body.light-theme h3,
+body.light-theme h4,
+body.light-theme h5,
+body.light-theme h6 {
+    color: #1e293b !important;
+}
+
+
+/* =========================================================
+   LIGHT THEME - THEME BUTTON
+   ========================================================= */
+
+body.light-theme #themeToggle {
+    color: #334155;
+    border-color: #94a3b8;
+}
+
+body.light-theme #themeToggle:hover {
+    background-color: #e2e8f0;
+}
+
+
+/* =========================================================
+   DARK THEME - EXPLICIT TEXT VISIBILITY
+   ========================================================= */
+
+/* FILE ANALYZER */
+body:not(.light-theme) .sidebar .text-white {
+    color: #ffffff !important;
+}
+
+/* Project information */
+body:not(.light-theme) .project-info .text-muted {
+    color: #94a3b8 !important;
+}
+
+/* History subtitle */
+body:not(.light-theme) .history-subtitle {
+    color: #94a3b8 !important;
+}
+
+//* =========================================================
+   FIX 1: LOGO TEXT IN LIGHT MODE
+   Overrides Bootstrap's .text-white on the sidebar span
+   ========================================================= */
+body.light-theme .sidebar span.text-white {
+    color: #0f172a !important;
+}
+
+/* =========================================================
+   FIX 2: STUDENT DETAILS IN DARK MODE
+   Fixes .text-muted visibility inside the dark project card
+   ========================================================= */
+.project-info .text-muted,
+body:not(.light-theme) .project-info .text-muted {
+    color: #cbd5e1 !important;
+}
+
+/* Ensures high contrast for student text when switched to light theme */
+body.light-theme .project-info .text-muted {
+    color: #475569 !important;
+}
